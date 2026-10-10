@@ -1,0 +1,18 @@
+[Unit]
+Description=Lab subnet gateway (Wi-Fi uplink, NAT, DNS redirection)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/lab-gateway.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
+
+# Install:
+#   cp scripts/lab-gateway.sh /usr/local/sbin/ && chmod +x /usr/local/sbin/lab-gateway.sh
+#   cp systemd/lab-gateway.service /etc/systemd/system/
+#   systemctl daemon-reload && systemctl enable --now lab-gateway.service
+# Verify with a full reboot, not just a restart of the unit.
